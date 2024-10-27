@@ -556,7 +556,7 @@ end
             end
             repeat wait() until game.Players.LocalPlayer
             wait(4)
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/KykyryzoB/KykyryzoB-Hub-SB/main/KykryzoB.lua"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/somethingterriblehappened/p/refs/heads/main/smelly.lua"))()
         ]])
     end
     game:GetService("TeleportService"):Teleport(103505724406848)
@@ -2606,7 +2606,7 @@ block.Parent = game.Workspace
                 game:GetService("GuiService"):ClearError()
             end)
     game.CoreGui.RobloxLoadingGUI:Destroy()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/KykyryzoB/KykyryzoB-Hub-SB/main/KykryzoB.lua"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/somethingterriblehappened/p/refs/heads/main/smelly.lua"))()
         ]])
     end
     game:GetService("TeleportService"):Teleport(9020359053)
@@ -2632,7 +2632,7 @@ block.Parent = game.Workspace
                 game:GetService("GuiService"):ClearError()
             end)
     game.CoreGui.RobloxLoadingGUI:Destroy()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/KykyryzoB/KykyryzoB-Hub-SB/main/KykryzoB.lua"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/somethingterriblehappened/p/refs/heads/main/smelly.lua"))()
     spawn(function()
         while true do
             game:GetService("GuiService"):ClearError()
@@ -2730,7 +2730,7 @@ block.Parent = game.Workspace
                 game:GetService("GuiService"):ClearError()
             end)
     game.CoreGui.RobloxLoadingGUI:Destroy()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/KykyryzoB/KykyryzoB-Hub-SB/main/KykryzoB.lua"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/somethingterriblehappened/p/refs/heads/main/smelly.lua"))()
     spawn(function()
         while true do
             game:GetService("GuiService"):ClearError()
@@ -2763,7 +2763,7 @@ block.Parent = game.Workspace
                 game:GetService("GuiService"):ClearError()
             end)
     game.CoreGui.RobloxLoadingGUI:Destroy()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/KykyryzoB/KykyryzoB-Hub-SB/main/KykryzoB.lua"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/somethingterriblehappened/p/refs/heads/main/smelly.lua"))()
         ]])
     end
     game:GetService("TeleportService"):Teleport(9020359053)
