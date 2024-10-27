@@ -47,7 +47,7 @@ _G.GetPotion = {
 	["Antitoxin"] = {"Blue Crystal","Glowing Mushroom","Plane Flower","Plane Flower","Elder Wood"},
 	["Corrupted Vine"] = {"Wild Vine","Wild Vine","Wild Vine","Blood Rose","Dark Root","Elder Wood","Jade Stone"},
 	["Field"] = {"Hazel Lily","Plane Flower","Plane Flower"},
-    ["Lost"] = {"Elder Wood","Elder Wood","Elder Wood","Blue Crystal","Red Crystal"}
+   	["Lost"] = {"Elder Wood","Elder Wood","Elder Wood","Blue Crystal","Red Crystal"}
 }
 
 ---GetSome---
