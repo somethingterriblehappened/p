@@ -61,30 +61,83 @@ game:GetService("UserInputService").InputBegan:Connect(function(input, gameProce
                 pullanimation.Parent = game.ReplicatedStorage
                 pullanimation.Name = "pullAnimation"
                 game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(pullanimation, game.Players.LocalPlayer.Character.Humanoid):Play()
+                cooldown(5)
             elseif game.Players.LocalPlayer.leaderstats.Glove.Value == "Flash" then
                 local distance = game.Players.LocalPlayer.Character.HumanoidRootPart.Position + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.LookVector * 50
                 game:GetService("ReplicatedStorage").FlashTeleport:FireServer()
-                wait(0.6)
                 if 112 < distance.X and distance.X < 132 then
+                    wait(0.6)
                     game.Players.LocalPlayer.Character:PivotTo(CFrame.new(distance))
                 else
+                    wait(0.6)
                     game.Players.LocalPlayer.Character:MoveTo(distance)
                 end
+                cooldown(3)
             elseif game.Players.LocalPlayer.leaderstats.Glove.Value == "Jet" then
                 for _, player in pairs(game.Players:GetPlayers()) do
                     game:GetService("ReplicatedStorage").AirStrike:FireServer(player.Character)
                 end
             elseif game.Players.LocalPlayer.leaderstats.Glove.Value == "Fort" then
                 game:GetService("ReplicatedStorage").Fortlol:FireServer()
+                cooldown(3)
             elseif game.Players.LocalPlayer.leaderstats.Glove.Value == "Shard" then
                 game:GetService("ReplicatedStorage").Shards:FireServer()
+                cooldown(4)
             elseif game.Players.LocalPlayer.leaderstats.Glove.Value == "Slapple" then
                 game:GetService("ReplicatedStorage").funnyTree:FireServer(game.Players.LocalPlayer.Character.HumanoidRootPart.Position)
             elseif game.Players.LocalPlayer.leaderstats.Glove.Value == "Stun" then
                 if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") then
                     game:GetService("ReplicatedStorage").StunR:FireServer(game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool"))
-                    cooldown(2)
+                    cooldown(10)
                 end
+            elseif game.Players.LocalPlayer.leaderstats.Glove.Value == "Pusher" then
+                game:GetService("ReplicatedStorage").PusherWall:FireServer()
+                cooldown(5)
+            elseif game.Players.LocalPlayer.leaderstats.Glove.Value == "Magnet" then
+                local LocalPlayer = game.Players.LocalPlayer
+                local tbl_3 = {}
+                for i, v in pairs(game.Players:GetPlayers()) do
+                    if v:FindFirstChild("leaderstats") ~= nil and v.Character:FindFirstChild("isInArena") and v.Character.isInArena.Value == true and v.Character.IsInDefaultArena.Value == false then
+                        table.insert(tbl_3, {
+                            Player = v;
+                            Magnitude = (LocalPlayer.Character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).Magnitude;
+                        })
+                    end
+                end
+                table.sort(tbl_3, function(arg1, arg2) -- Line 25
+                    local var29
+                    if arg1.Magnitude >= arg2.Magnitude then
+                        var29 = false
+                    else
+                        var29 = true
+                    end
+                    return var29
+                end)
+                if tbl_3[2] ~= nil and tbl_3[2].Player ~= nil then
+                    if tbl_3[2].Player ~= LocalPlayer then
+                        var5_upvw = true
+                        game.ReplicatedStorage.MagnetS:FireServer()
+                        local Attachment_2 = Instance.new("Attachment")
+                        Attachment_2.Parent = LocalPlayer.Character.HumanoidRootPart
+                        Attachment_2.Name = "magnetismATTACHMENT"
+                        local AlignPosition_2 = Instance.new("AlignPosition")
+                        AlignPosition_2.MaxForce = 25000
+                        AlignPosition_2.Responsiveness = 20
+                        i = "Attachment"
+                        local any_2 = Instance.new(i)
+                        v = tbl_3[2].Player.Character
+                        i = v.HumanoidRootPart
+                        any_2.Parent = i
+                        AlignPosition_2.Attachment1 = any_2
+                        AlignPosition_2.Attachment0 = Attachment_2
+                        i = workspace
+                        AlignPosition_2.Parent = i
+                        i = game:GetService("Debris"):AddItem(any_2, 0.5)
+                        i = game:GetService("Debris"):AddItem(Attachment_2, 0.5)
+                        i = game:GetService("Debris"):AddItem(AlignPosition_2, 0.5)
+                    end
+                end
+                cooldown(4)
             else
         --game:GetService("ReplicatedStorage").HunterAbility:FireServer(game.Players[""].Character)
         --game:GetService("ReplicatedStorage").StunR:FireServer(game.Players.LocalPlayer.Character:WaitForChild("Default"))
@@ -93,6 +146,11 @@ game:GetService("UserInputService").InputBegan:Connect(function(input, gameProce
             end
         end
 
+        if input.KeyCode == Enum.KeyCode.E then
+            if game.Players.LocalPlayer.leaderstats.Glove.Value == "Brick" then
+                cooldown(1)
+            end
+        end
         if input.KeyCode == Enum.KeyCode.R then
             if game.Players.LocalPlayer.leaderstats.Glove.Value == "Poltergeist" then
                 game:GetService("ReplicatedStorage").GeneralAbility:FireServer("ability2")
@@ -185,6 +243,6 @@ end)
 
 function cooldown(time)
     debounce = true
-    task.wait(time)
+    wait(time)
     debounce = false
 end
