@@ -30,6 +30,7 @@
 --game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(game.ReplicatedStorage.Assets["Ice Skate"].SkateLoop, game.Players.LocalPlayer.Character.Humanoid):Play()
 
 debounce = false
+detonate = false
 
 game:GetService("UserInputService").InputBegan:Connect(function(input, gameProcessedEvent)
     if gameProcessedEvent then return end
@@ -52,8 +53,16 @@ game:GetService("UserInputService").InputBegan:Connect(function(input, gameProce
                 game:GetService("ReplicatedStorage").GeneralAbilityUnreliable:FireServer("start")
             elseif game.Players.LocalPlayer.leaderstats.Glove.Value == "Warp" then
                 game:GetService("ReplicatedStorage").WLOC:FireServer()
+                cooldown(4)
             elseif game.Players.LocalPlayer.leaderstats.Glove.Value == "Bomb" then
-                game:GetService("ReplicatedStorage").BombThrow:FireServer()
+                if detonate == false then
+                    game:GetService("ReplicatedStorage").BombThrow:FireServer()
+                    detonate = true
+                elseif detonate == true then
+                    game:GetService("ReplicatedStorage").BombThrow:FireServer()
+                    detonate = false
+                    cooldown(5)
+                end
             elseif game.Players.LocalPlayer.leaderstats.Glove.Value == "Za Hando" then
                 game:GetService("ReplicatedStorage").Erase:FireServer()
                 local pullanimation = Instance.new("Animation")
@@ -65,18 +74,17 @@ game:GetService("UserInputService").InputBegan:Connect(function(input, gameProce
             elseif game.Players.LocalPlayer.leaderstats.Glove.Value == "Flash" then
                 local distance = game.Players.LocalPlayer.Character.HumanoidRootPart.Position + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.LookVector * 50
                 game:GetService("ReplicatedStorage").FlashTeleport:FireServer()
+                debounce = true
+                wait(0.6)                                
                 if 112 < distance.X and distance.X < 132 then
-                    wait(0.6)
                     game.Players.LocalPlayer.Character:PivotTo(CFrame.new(distance))
                 else
-                    wait(0.6)
                     game.Players.LocalPlayer.Character:MoveTo(distance)
                 end
-                cooldown(3)
+                wait(1.4)
+                debounce = false
             elseif game.Players.LocalPlayer.leaderstats.Glove.Value == "Jet" then
-                for _, player in pairs(game.Players:GetPlayers()) do
-                    game:GetService("ReplicatedStorage").AirStrike:FireServer(player.Character)
-                end
+
             elseif game.Players.LocalPlayer.leaderstats.Glove.Value == "Fort" then
                 game:GetService("ReplicatedStorage").Fortlol:FireServer()
                 cooldown(3)
@@ -85,6 +93,7 @@ game:GetService("UserInputService").InputBegan:Connect(function(input, gameProce
                 cooldown(4)
             elseif game.Players.LocalPlayer.leaderstats.Glove.Value == "Slapple" then
                 game:GetService("ReplicatedStorage").funnyTree:FireServer(game.Players.LocalPlayer.Character.HumanoidRootPart.Position)
+                cooldown(3)
             elseif game.Players.LocalPlayer.leaderstats.Glove.Value == "Stun" then
                 if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") then
                     game:GetService("ReplicatedStorage").StunR:FireServer(game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool"))
@@ -138,13 +147,16 @@ game:GetService("UserInputService").InputBegan:Connect(function(input, gameProce
                     end
                 end
                 cooldown(4)
+            elseif game.Players.LocalPlayer.leaderstats.Glove.Value == "bus" then
+                game:GetService("ReplicatedStorage").busmoment:FireServer()
+                cooldown(5)
             else
         --game:GetService("ReplicatedStorage").HunterAbility:FireServer(game.Players[""].Character)
-        --game:GetService("ReplicatedStorage").StunR:FireServer(game.Players.LocalPlayer.Character:WaitForChild("Default"))
             game:GetService("ReplicatedStorage").GeneralAbility:FireServer()
         --game:GetService("ReplicatedStorage").Ghostinvisibilityactivated:FireServer()
             end
         end
+    end
 
         if input.KeyCode == Enum.KeyCode.E then
             if game.Players.LocalPlayer.leaderstats.Glove.Value == "Brick" then
@@ -238,7 +250,6 @@ game:GetService("UserInputService").InputBegan:Connect(function(input, gameProce
         if input.KeyCode == Enum.KeyCode.M then
             
         end
-    end
 end)
 
 function cooldown(time)
